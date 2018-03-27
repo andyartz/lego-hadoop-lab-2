@@ -1,0 +1,1 @@
+CREATE DATABASE IF NOT EXISTS ${new_db_name} COMMENT '${new_db_comment}';
