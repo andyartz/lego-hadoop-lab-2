@@ -1,11 +1,13 @@
 DROP TABLE IF EXISTS default.sets;
 CREATE TABLE sets (
-    SET_ID STRING,
-    NAME STRING,
-    YEAR INT,
-    THEME_ID INT,
-    NUM_PARTS INT
-);
+    set_id STRING,
+    name STRING,
+    year INT,
+    theme_id INT,
+    num_parts INT
+)
+COMMENT 'Contains lego sets data.'
+;
 --ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
 --WITH SERDEPROPERTIES
 --(
