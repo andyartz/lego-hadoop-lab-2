@@ -26,11 +26,11 @@ public class LegoSetsHqlTest extends TableTestBase {
   @Override
   public void setupExpectedHiveColumnInfos() {
     int columnPosition = 0;
-    putHiveColumnInfo(columnPosition++, "set_id", "string", "");
-    putHiveColumnInfo(columnPosition++, "name", "string", "");
-    putHiveColumnInfo(columnPosition++, "year", "int", "");
-    putHiveColumnInfo(columnPosition++, "theme_id", "int", "");
-    putHiveColumnInfo(columnPosition++, "num_parts", "int", "");
+    putHiveColumnInfo(columnPosition++, "set_id", "string", "from deserializer");
+    putHiveColumnInfo(columnPosition++, "name", "string", "from deserializer");
+    putHiveColumnInfo(columnPosition++, "year", "string", "from deserializer");
+    putHiveColumnInfo(columnPosition++, "theme_id", "string", "from deserializer");
+    putHiveColumnInfo(columnPosition++, "num_parts", "string", "from deserializer");
   }
 
   @Override

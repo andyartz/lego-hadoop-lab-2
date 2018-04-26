@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS default.sets;
-CREATE TABLE sets (
+CREATE EXTERNAL TABLE sets (
     set_id STRING,
     name STRING,
     year INT,
@@ -7,10 +7,10 @@ CREATE TABLE sets (
     num_parts INT
 )
 COMMENT 'Contains lego sets data.'
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES
+(
+    "separatorChar" = ",",
+    "quoteChar"="\""
+)
 ;
---ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
---WITH SERDEPROPERTIES
---(
---    "separatorChar" = ",",
---    "quoteChar"="\""
---);
