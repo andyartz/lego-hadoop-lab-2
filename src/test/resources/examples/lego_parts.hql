@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS default.parts;
-CREATE TABLE parts (
+CREATE EXTERNAL TABLE parts (
     part_id STRING,
     name STRING,
     part_cat_id INT
