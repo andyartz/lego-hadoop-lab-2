@@ -18,9 +18,7 @@ public class LegoSetsHqlTest extends TableTestBase {
   String databaseUnderTest = "default";
 
   public LegoSetsHqlTest() {
-    super("examples/lego_sets.hql",
-        "default",
-        "sets");
+    super("examples/lego_sets.hql", "default", "sets");
   }
 
   @Override
@@ -36,11 +34,6 @@ public class LegoSetsHqlTest extends TableTestBase {
   @Override
   public void initializeExpectedTableComment() {
     setExpectedTableComment("Contains lego sets data.");
-  }
-
-  @Override
-  public void setupTestEnvironment() {
-    super.setupTestEnvironment();
   }
 
   @Test
@@ -59,9 +52,8 @@ public class LegoSetsHqlTest extends TableTestBase {
     /*****  VERIFY RESULTS  *****/
     List<String> expectedRowData = Lists.newArrayList("SET_1\tSET_1_NAME\t1999\t-1\t0", "SET_2\tset_2_name\t-2000\t0\t-20", "SET_3\tSet_3_name\t2099\t1\t1000", "SET_4\tSet_4_Name\t2018\t100\t100");
 
-    List<String> actualRowData =
-            shell.executeQuery(
-                    String.format("SELECT * FROM %s.%s ORDER BY SET_ID", databaseUnderTest, tableUnderTest));
+    List<String> actualRowData = shell.executeQuery(String.format("SELECT * FROM %s.%s ORDER BY SET_ID",
+                                                    databaseUnderTest, tableUnderTest));
     assertEquals(expectedRowData, actualRowData);
   }
 }

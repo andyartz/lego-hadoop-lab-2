@@ -13,50 +13,49 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 @RunWith(StandaloneHiveRunner.class)
-public class LegoPartsHqlTest extends TableTestBase {
-  private String tableUnderTest = "parts";
+public class LegoInventoriesHqlTest extends TableTestBase {
+  private String tableUnderTest = "inventories";
   private String databaseUnderTest = "default";
 
-  public LegoPartsHqlTest() {
-    super("examples/lego_parts.hql", "default", "parts");
+  public LegoInventoriesHqlTest() {
+    super("examples/lego_inventories.hql", "default", "inventories");
   }
 
   @Override
   public void setupExpectedHiveColumnInfos() {
-    putHiveColumnInfo(0, "part_id", "string", "from deserializer");
-    putHiveColumnInfo(1, "name", "string", "from deserializer");
-    putHiveColumnInfo(2, "part_cat_id", "string", "from deserializer");
+    putHiveColumnInfo(0, "inventory_id", "string", "from deserializer");
+    putHiveColumnInfo(1, "version", "string", "from deserializer");
+    putHiveColumnInfo(2, "set_id", "string", "from deserializer");
   }
 
   @Override
   public void initializeExpectedTableComment() {
-    setExpectedTableComment("Contains lego parts data.");
+    setExpectedTableComment("Contains lego inventories data.");
   }
 
   @Test
   public void tableColumnsShouldBeCorrect() {
 
     //  SETUP
-    shellUtil.executeResourceHqlIgnoreIOException(shell, "examples/lego_parts.hql", String.format("Unable to setup %s!", tableUnderTest));
+    shellUtil.executeResourceHqlIgnoreIOException(shell, "examples/lego_inventories.hql", String.format("Unable to setup %s!", tableUnderTest));
 
     //  EXECUTE SCRIPT UNDER TEST
     try {
-      shellUtil.executeResourceHql(shell, "examples/data_scripts/lego_parts_01.hql");
+      shellUtil.executeResourceHql(shell, "examples/data_scripts/lego_inventories_01.hql");
     } catch (IOException e) {
       e.printStackTrace();
       fail("Unable to run script under test!");
     }
 
     //  VERIFY RESULTS
-    List<String> actualRowData = shell.executeQuery(String.format("SELECT * FROM %s.%s ORDER BY PART_ID",
+    List<String> actualRowData = shell.executeQuery(String.format("SELECT * FROM %s.%s ORDER BY inventory_id",
                                                                   databaseUnderTest, tableUnderTest));
     List<String> expectedRowData = Lists.newArrayList(
-            "PART_1\tPART_1_NAME\t0",
-            "PART_2\tPART_2_NAME\t1",
-            "PART_3\tPART_3_NAME\t2",
-            "PART_4\tPART_4_NAME\t2",
-            "PART_5\tPART_5_NAME\t3",
-            "PART_6\tPART_6_NAME\t3");
+            "1\t1\tSET_1",
+            "2\t1\tSET_2",
+            "3\t2\tSET_3",
+            "4\t1\tSET_3"
+    );
 
     assertEquals(expectedRowData, actualRowData);
   }

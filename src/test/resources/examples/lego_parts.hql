@@ -1,12 +1,13 @@
 DROP TABLE IF EXISTS default.parts;
 CREATE TABLE parts (
-    PART_ID STRING,
-    NAME STRING,
-    PART_CAT_ID INT
+    part_id STRING,
+    name STRING,
+    part_cat_id INT
+)
+COMMENT "Contains lego parts data."
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES
+(
+    "separatorChar" = ",",
+    "quoteChar"="\""
 );
---ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
---WITH SERDEPROPERTIES
---(
---    "separatorChar" = ",",
---    "quoteChar"="\""
---);
